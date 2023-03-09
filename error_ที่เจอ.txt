@@ -1,0 +1,15 @@
+calendar app python --> teacher_version_design
+มีปัญหาตอนที่คลิก next ไปเรื่อยๆจนถึง August 2024 
+และคลิก back ไปเรื่อยๆจนถึง December 2020
+
+จากนั้นมันก็ขึ้น error ประมาณว่า 
+
+ File "C:\Users\narin\Documents\Python\Paopao_project_2022\test_mobile_app\mobile_env\lib\site-packages\kivy\lang\builder.py", line 55, in custom_callback     
+     exec(__kvlang__.co_value, idmap)
+   File "C:\Users\narin\Documents\Python\Paopao_project_2022\test_mobile_app\mobile_env\teacher_version_design\designversion1_1.kv", line 383, in <module>       
+     on_press: root.back_button_pressed()
+   File ".\main.py", line 86, in back_button_pressed
+     self.calculate_for_the_first_of_month(self.current_month, self.current_year)
+   File ".\main.py", line 289, in calculate_for_the_first_of_month
+     list_of_dates.append(str(i))
+ UnboundLocalError: local variable 'list_of_dates' referenced before assignment

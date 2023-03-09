@@ -1,0 +1,649 @@
+WindowManager:
+    SplashScreen:
+    MainScreen:
+    TodoScreen:
+
+<SplashScreen>:
+    name: "splash"
+    AnchorLayout:
+        Button:
+            size_hint: (.2, .2)
+            anchor_x: "center"
+            anchor_y: "center"
+            background_normal: "assets/kfc.jpg"
+            background_down: "assets/kfc.jpg"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+
+<MainScreen>:
+    name: "main"
+    on_enter: root.show_today_date()
+    FloatLayout:
+        Label:
+            text: "Year: "
+            pos: (200, 530)
+            size_hint: (.2, .05)
+            
+        TextInput:
+            text: root.current_year_str
+            pos: (300, 530)
+            size_hint: (.2, .05)
+            multiline: False
+            on_text_validate: root.text_validate_fnc()
+        Label:
+            text: root.current_month_str
+            pos: (300, 490)
+            size_hint: (.2, .05)
+            bold: True
+        GridLayout:
+            id: calendar_grid
+            cols: 7
+            size_hint: (.5, .5)
+            pos: (10, 200)
+            cols_minimum: {0: 110, 1: 110, 2: 110, 3: 110, 4: 110, 5: 110, 6: 110}
+            rows_minimum: {0: 60, 1: 60, 2: 60, 3: 60, 4: 60, 5: 60, 6: 60}
+            Label:
+                text: "SUN"
+                bold: True
+                color: 1,0,0,1
+            Label:
+                text: "MON"
+                bold: True
+                color: 1,1,0,1
+            Label:
+                text: "TUE"
+                bold: True
+                color: 1,1,0,1
+            Label:
+                text: "WED"
+                bold: True
+                color: 1,1,0,1
+            Label:
+                text: "THU"
+                bold: True
+                color: 1,1,0,1
+            Label:
+                text: "FRI"
+                bold: True
+                color: 1,1,0,1
+            Label:
+                text: "SAT"
+                bold: True
+                color: 1,0,0,1
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row00_label
+                    text: "1"
+                Button:
+                    id: row00_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row00_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row01_label
+                    text: "2"
+                Button:
+                    id: row01_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row01_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row02_label
+                    text: "3"
+                Button:
+                    id: row02_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: root.event_pressed(row02_label)
+                    on_press: 
+                        root.event_pressed(row02_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row03_label
+                    text: "4"
+                Button:
+                    id: row03_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row03_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row04_label
+                    text: "5"
+                Button:
+                    id: row04_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row04_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row05_label
+                    text: "6"
+                Button:
+                    id: row05_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row05_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row06_label
+                    text: "7"
+                Button:
+                    id: row06_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row06_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row10_label
+                    text: "8"
+                Button:
+                    id: row10_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row10_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row11_label
+                    text: "9"
+                Button:
+                    id: row11_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row11_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row12_label
+                    text: "10"
+                Button:
+                    id: row12_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row12_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row13_label
+                    text: "11"
+                Button:
+                    id: row13_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row13_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row14_label
+                    text: "12"
+                Button:
+                    id: row14_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row14_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row15_label
+                    text: "13"
+                Button:
+                    id: row15_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row15_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row16_label
+                    text: "14"
+                Button:
+                    id: row16_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row16_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row20_label
+                    text: "15"
+                Button:
+                    id: row20_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row20_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row21_label
+                    text: "16"
+                Button:
+                    id: row21_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row21_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row22_label
+                    text: "17"
+                Button:
+                    id: row22_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row22_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row23_label
+                    text: "18"
+                Button:
+                    id: row23_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row23_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row24_label
+                    text: "19"
+                Button:
+                    id: row24_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row24_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row25_label
+                    text: "20"
+                Button:
+                    id: row25_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row25_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row26_label
+                    text: "21"
+                Button:
+                    id: row26_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row26_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row30_label
+                    text: "22"
+                Button:
+                    id: row30_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row30_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row31_label
+                    text: "23"
+                Button:
+                    id: row31_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row31_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row32_label
+                    text: "24"
+                Button:
+                    id: row32_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row32_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row33_label
+                    text: "25"
+                Button:
+                    id: row33_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row33_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row34_label
+                    text: "26"
+                Button:
+                    id: row34_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row34_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row35_label
+                    text: "27"
+                Button:
+                    id: row35_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row35_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row36_label
+                    text: "28"
+                Button:
+                    id: row36_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row36_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row40_label
+                    text: "29"
+                Button:
+                    id: row40_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row40_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row41_label
+                    text: "30"
+                Button:
+                    id: row41_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row41_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row42_label
+                    text: "31"
+                Button:
+                    id: row42_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row42_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row43_label
+                    text: "*"
+                Button:
+                    id: row43_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row43_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row44_label
+                    text: "*"
+                Button:
+                    id: row44_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row44_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row45_label
+                    text: "*"
+                Button:
+                    id: row45_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row45_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row46_label
+                    text: "*"
+                Button:
+                    id: row46_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row46_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row50_label
+                    text: "*"
+                Button:
+                    id: row50_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row50_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row51_label
+                    text: "*"
+                Button:
+                    id: row51_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row51_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: row52_label
+                    text: "*"
+                Button:
+                    id: row52_event_label
+                    text: ''
+                    background_color: 0, 0, .5, .5
+                    on_press: 
+                        root.event_pressed(row52_label)
+                        if root.date_valid == True : \
+                        root.manager.transition.direction = "left"
+                        
+            
+        Button:
+            id: button_back
+            text: "<"
+            pos: (10, 10)
+            size_hint: (.2, .1)
+            on_press: root.back_button_pressed()
+        Button:
+            id: button_next
+            text: ">"
+            pos: (630, 10)
+            size_hint: (.2, .1)
+            on_press: root.next_button_pressed()
+
+<TodoScreen>:
+    name: "todo"
+    on_enter: on_enter: root.todo_enter()
+    GridLayout:
+		cols:1
+		size: root.width, root.height
+		GridLayout:
+			cols:2
+
+            Label:
+                id: todo_title_label
+				text: "Title"
+			TextInput:
+				id: todo_title
+				multiline:False
+
+			Label:
+                id: todo_datetime_label
+				text: "Date/Time"
+			TextInput:
+				id: todo_datetime
+				multiline:False
+
+            Label:
+                id: todo_list_label
+				text: "ToDo"
+			TextInput:
+				id: todo_list
+				multiline:True
+
+			Label:
+                id: todo_forwho_label
+				text: "For Who?"
+			TextInput:
+				id: todo_forwho
+				multiline:False
+
+            Button:
+                size_hint: (.2, .2)
+                anchor_x: "center"
+                anchor_y: "center"
+                on_release:
+                    root.event_cancel()
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+                Image:
+				    id: cancel_image_button
+				    source: "assets/close.png"
+				    center_x: self.parent.center_x
+				    center_y: self.parent.center_y
+				    size: root.width, root.height
+            Button:
+                size_hint: (.2, .2)
+                anchor_x: "center"
+                anchor_y: "center"
+                on_release:
+                    root.event_save()
+                    app.root.current = "main"
+                    root.manager.transition.direction = "left"
+                Image:
+				    id: confirm_image_button
+				    source: "assets/confirm.png"
+				    center_x: self.parent.center_x
+				    center_y: self.parent.center_y
+				    size: root.width, root.height
+                
