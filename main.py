@@ -9,12 +9,6 @@ import leapyear_cal as lyc
 import todo_json_utils as json_util
 
 
-label_list = ['row00_label','row01_label','row02_label','row03_label','row04_label','row05_label','row06_label',
-    'row10_label','row11_label','row12_label','row13_label','row14_label','row15_label','row16_label',
-    'row20_label','row21_label','row22_label','row23_label','row24_label','row25_label','row26_label',
-    'row30_label','row31_label','row32_label','row33_label','row34_label','row35_label','row36_label',
-    'row40_label','row41_label','row42_label','row43_label','row44_label','row45_label','row46_label',
-    'row50_label','row51_label','row52_label']
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 months_length = len(months)
 
@@ -62,9 +56,6 @@ class MainScreen(Screen):
         self.today_month = int(x[1])
         self.today_year = int(x[0])
 
-        # for i in self.ids.calendar_grid.children:
-        #     print("show me children --> ", type(i))
-
         global global_pass_month, global_pass_year
         global_pass_month = self.current_month
         global_pass_year = self.current_year
@@ -107,102 +98,27 @@ class MainScreen(Screen):
         # print("back_button_pressed is called.")
     
     def text_validate_fnc(self):
-        print("text_validate_fnc is called.")
-        # zeller's rule
-        # F=k+ [(13*m-1)/5] +D+ [D/4] +[C/4]-2*C where
-
-        # k is  the day of the month.
-        # m is the month number.
-        # D is the last two digits of the year.
-        # C is the first two digits of the year.
-
+        print("text_validate_fnc is called. >>>>>>>>>>>>>>>>>>>>> we will check year here.")
         """
-        Note:
-            According to Zeller’s rule the month is counted as follows:
-            March is 1, April is 2….. January is 11 and February is 12.
-            So the year starts from March and ends with February. So if the given date has month as January or February subtract 1 from the year. For example:
-            For 1st January 1998 subtract 1 from 1998 i.e. 1998-1=1997 and use 1997 for calculating D.
-            Discard all the decimal values and then find the final value of F.
-        
-            After getting the value of F, divide it by 7.The value of F can be either positive or negative. 
-            If it is negative, let us suppose F = -15. When we divide by 7 we have to find the greatest multiple of 7 less than -15, 
-            so the remainder will be positive (or zero). -21 is the greatest multiple of 7 less than -15, so the remainder is 6 since -21 + 6 = -15.
-        
-            Alternatively, we can say that -7 goes into -15 twice, 
-            making -14 and leaving a remainder of -1.If we add 7 since the remainder is negative i.e. -1 + 7 we again get 6 as remainder. 
-            After getting the remainder we can find the day of the week for the given date. 
-            Following are the values for the corresponding remainders:
-        
-            Sun	Mon	Tue	Wed	Thu	Fri	Sat
-            0	1	2	3	4	5	6
-        
+            call modify_calendar here
+            call change_color of label date if current date presents here
         """
-        for_d = self.current_year
-        if self.current_month in (1, 2):
-            for_d -= 1
-        C = str(for_d)[0:2]
-        D = str(for_d)[2:]
-        K = self.current_date
-        M = self.current_month
-        # if self.current_month == 1:
-        #     M = 11
-        # elif self.current_month == 2:
-        #     M = 12
-        # elif self.current_month == 3:
-        #     M = 1
-        # elif self.current_month == 4:
-        #     M = 2
-        # elif self.current_month == 5:
-        #     M = 3
-        # elif self.current_month == 6:
-        #     M = 4
-        # elif self.current_month == 7:
-        #     M = 5
-        # elif self.current_month == 8:
-        #     M = 6
-        # elif self.current_month == 9:
-        #     M = 7
-        # elif self.current_month == 10:
-        #     M = 8
-        # elif self.current_month == 11:
-        #     M = 9
-        # elif self.current_month == 12:
-        #     M = 10
-        print("M--> ", M)
-        print("K--> ", K)
-        print("C--> ", C)
-        print("D--> ", D)
+        global global_pass_year
 
-        """Zeller's Congruence | The Day of the Week --> https://www.youtube.com/watch?v=_ji1E8ARMWg"""
+        year_input = self.ids.current_year_input.text
+        year_input = str(year_input).strip()
+        if len(year_input) > 0 and len(year_input) < 5:
+            if year_input.isdigit():
+                print("It's a valid year_input -->", global_pass_month, global_pass_year, year_input)
+                self.calculate_for_the_first_of_month(global_pass_month, year_input)
+                self.current_year = int(year_input)
+                global_pass_year = self.current_year
+            else:
+                print("Input is not digit.")
+        else:
+            print("Invalid string input.")
 
-        # F = int(K) + int((13*int(M)-1)/5) + int(D) + int(int(D)/4) + int(int(C)/4) - int(2*int(C))
-        F = int(K) + int((13 * (M + 1))/5) + int(D) + int(int(D)/4) + 5 - int(C) 
-        print("F-->", F)
-        ans = F % 7
-        print("Ans -> ", ans)
-        if ans == 0:
-            print("Sunday")
-        elif ans == 1:
-            print("Monday")
-        elif ans == 2:
-            print("Tuesday")
-        elif ans == 3:
-            print("Wednesday")
-        elif ans == 4:
-            print("Thursday")
-        elif ans == 5:
-            print("Friday")
-        elif ans == 6:
-            print("Saturday")
-
-        # create variable for our widget
-        name = self.ids.row00_label.text
-
-        # update the label
-        # self.ids.row00_label.text = "hello"
         
-
-
     def calculate_for_the_first_of_month(self, month, year):
 
         show_today_date_flag = False
@@ -267,12 +183,20 @@ class MainScreen(Screen):
         _feb_month = [2]
 
         print("1st of this month is --> ")
+        label_list = ['row00_label','row01_label','row02_label','row03_label','row04_label','row05_label','row06_label',
+                        'row10_label','row11_label','row12_label','row13_label','row14_label','row15_label','row16_label',
+                        'row20_label','row21_label','row22_label','row23_label','row24_label','row25_label','row26_label',
+                        'row30_label','row31_label','row32_label','row33_label','row34_label','row35_label','row36_label',
+                        'row40_label','row41_label','row42_label','row43_label','row44_label','row45_label','row46_label',
+                        'row50_label','row51_label','row52_label']
+        
         if ans == 0:
             print("Sunday")
             if int(M) in _feb_month:
                 if lyc.leapYearCalculator(year=year):
                     # 29 days for feb
                     print("29-day month")
+                    list_of_dates = []
                     for i in range(0):
                         list_of_dates.append("")
                     for i in range(1, 30):
@@ -287,6 +211,7 @@ class MainScreen(Screen):
                 else:
                     # 28 days for feb
                     print("28-day month")
+                    list_of_dates = []
                     for i in range(0):
                         list_of_dates.append("")
                     for i in range(1, 29):
@@ -302,6 +227,7 @@ class MainScreen(Screen):
             elif int(M) in _30_month:
                 # 30 day month
                 print("30-day month")
+                list_of_dates = []
                 for i in range(0):
                     list_of_dates.append("")
                 for i in range(1, 31):
@@ -738,12 +664,33 @@ class MainScreen(Screen):
 # https://www.youtube.com/watch?v=NmvNutNqKWM
 # video tutorial for changing screen and passing data between them.
 class TodoScreen(Screen):
+
+    # title = 0
+    # title_str = StringProperty("")
+    # date_time = 0
+    # date_time_str = StringProperty("")
+    # todo = 0
+    # todo_str = StringProperty("")
+    # forwho = 0
+    # forwho_str = StringProperty("")
+
     def todo_enter(self):
         print("todo_enter is called. : show me pass_date/pass_month/pass_year ==> ", global_pass_date, global_pass_month, global_pass_year)
         if global_pass_date and global_pass_month and global_pass_year:
-            print("all data is here together.")
+            # print("all data is here together.")
 
-            json_util.read_todo_to_file(global_pass_date, global_pass_month, global_pass_year)
+            return_load = json_util.read_todo_to_file(global_pass_date, global_pass_month, global_pass_year)
+            print("show me found right item --> ", return_load)
+            try:
+                self.ids.todo_title.text = return_load[0]['title']
+                self.ids.todo_datetime.text = return_load[0]['date'] + " " + return_load[0]['time']
+                self.ids.todo_list.text = return_load[0]['todo']
+                self.ids.todo_forwho.text = return_load[0]['who']
+            except Exception as e:
+                self.ids.todo_title.text = ""
+                self.ids.todo_datetime.text = ""
+                self.ids.todo_list.text = ""
+                self.ids.todo_forwho.text = ""
 
     def event_save(self, todo_list=None, to_who=None):
         global global_pass_date, global_pass_month, global_pass_year

@@ -5,6 +5,7 @@ import json
 def write_todo_to_file():
     # Data to be written
     dictionary = {
+        "id": 2345,
         "date": "25/02/2023",
         "time": "20.10",
         "who": "Narindech Wanadecha",
@@ -25,6 +26,7 @@ def read_todo_to_file(date, month, year):
         json_object = json.load(openfile)
     
     print(json_object)
+    return_load = []
     for item in json_object:
         print("item --> ", item)
         date_timestamp = item['date']
@@ -37,4 +39,6 @@ def read_todo_to_file(date, month, year):
 
         if str(date) == date_util and str(month) == month_util and str(year) == year_util:
             print("Found the right item.")
+            return_load.append(item)
+    return return_load
     # print(type(json_object))
